@@ -1,6 +1,6 @@
 
-module.exports = {
-    doIt: () => {
-        document.getElementById("text").textContent = "IT WORKED!";
-    }
-};
+const change = function () {
+    document.getElementById('text').textContent = "It worked without subdirs!";
+}
+
+export default change;

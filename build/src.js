@@ -27,7 +27,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		2: 0
+/******/ 		1: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -137,27 +137,110 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 298);
+/******/ 	return __webpack_require__(__webpack_require__.s = 297);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 298:
+/***/ 297:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-document.getElementById("text").textContent = "I should change in 1000ms";
+setTimeout(function () {
+    var name = 'Change';
+
+    // tries to load ./Change and fails
+    __webpack_require__(304)("./" + name).then(function (module) {
+        return module.default();
+    }).catch(function (err) {
+        return console.error(err);
+    });
+}, 1000);
 
 setTimeout(function () {
-    __webpack_require__.e/* require.ensure */(0).then((function (require) {
-        // breaks
-        var viewName = './change';
-        var obj = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-        obj.doIt();
-    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
-}, 1000);
+    var name = 'change';
+
+    // loads ./change.js and works
+    __webpack_require__(301)("./" + name).then(function (module) {
+        return module.default();
+    }).catch(function (err) {
+        return console.error(err);
+    });
+}, 2000);
+
+/***/ },
+
+/***/ 301:
+/***/ function(module, exports, __webpack_require__) {
+
+var map = {
+	"./change": [
+		299,
+		4
+	],
+	"./change.js": [
+		299,
+		4
+	],
+	"./index": [
+		297
+	],
+	"./index.js": [
+		297
+	],
+	"./modules/Change/index": [
+		303,
+		2
+	],
+	"./modules/Change/index.js": [
+		303,
+		2
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+module.exports = webpackAsyncContext;
+webpackAsyncContext.id = 301;
+
+
+/***/ },
+
+/***/ 304:
+/***/ function(module, exports, __webpack_require__) {
+
+var map = {
+	"./Change/index": [
+		303,
+		2
+	],
+	"./Change/index.js": [
+		303,
+		2
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+module.exports = webpackAsyncContext;
+webpackAsyncContext.id = 304;
+
 
 /***/ }
 
